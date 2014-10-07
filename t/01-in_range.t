@@ -54,8 +54,6 @@ my @options = (
 # Start testing
 ##################################################################################
 foreach my $option_ref ( @options ) {
-    note( "Ranges: " . join(',', map { "[" . join(',',$_) . "]" } @{$option_ref->{ranges}}) );
-
     my $test_range = new_ok( 'Data::Int::Range::Parser', [$option_ref] );
 
     # Is in range
