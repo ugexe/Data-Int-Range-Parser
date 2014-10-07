@@ -193,7 +193,7 @@ sub _range_match {
 
     return 1 if( 
         grep { 
-            my ($start, $end) = _min_max( split(/$rx_range_delim/, $_) );
+            my ($start, $end) = _min_max( split($rx_range_delim, $_) );
             (sort {$a <=> $b} $start, $end, $against)[1] == $against; 
         } grep { split($rx_range_delim,$_,2) >= 2 } 
             map { split($rx_group_delim, $_) } 
