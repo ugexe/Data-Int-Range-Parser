@@ -62,53 +62,53 @@ subtest 'in_range-not_strict' => sub {
         # Is in range
         {
             is( $test_range->in_range(2),   1, "Number matched exact range group." );
-            #is( $test_range->in_range(-10), 1, "Number (negative) matched exact range group." );
+            is( $test_range->in_range(-10), 1, "Number (negative) matched exact range group." );
 
             is( $test_range->in_range(6),   1, "Number matched inside range group." );
-            #is( $test_range->in_range(-4),  1, "Number (negative) matched inside range group." );
+            is( $test_range->in_range(-4),  1, "Number (negative) matched inside range group." );
             is( $test_range->in_range(5),   1, "Number matched against start of range." );
-            #is( $test_range->in_range(-5),  1, "Number (negative) matched against start of range." );
+            is( $test_range->in_range(-5),  1, "Number (negative) matched against start of range." );
             is( $test_range->in_range(10),  1, "Number matched against end of range." );
-            #is( $test_range->in_range(-2),  1, "Number (negative) matched against end of range." );
+            is( $test_range->in_range(-2),  1, "Number (negative) matched against end of range." );
 
             is( $test_range->in_range(11),  1, "Number matched against start of bad/infinite range." );
-            #is( $test_range->in_range(-20), 1, "Number (negative) matched against start of bad/infinite range." );
+            is( $test_range->in_range(-20), 1, "Number (negative) matched against start of bad/infinite range." );
 
             is( $test_range->in_range(15),  1, "Number matched against start of backwards range." );
-            #is( $test_range->in_range(-30), 1, "Number (negative) matched against start of backwards range." );
+            is( $test_range->in_range(-30), 1, "Number (negative) matched against start of backwards range." );
             is( $test_range->in_range(20),  1, "Number matched against end of backwards range." );
-            #is( $test_range->in_range(-35), 1, "Number (negative) matched against end of backwards range." );
+            is( $test_range->in_range(-35), 1, "Number (negative) matched against end of backwards range." );
 
             is( $test_range->in_range(21),  1, "Number matched against start of invalid-style range." );
-            #is( $test_range->in_range(-45), 1, "Number (negative) matched against start of invalid-style range." );
+            is( $test_range->in_range(-45), 1, "Number (negative) matched against start of invalid-style range." );
             is( $test_range->in_range(23),  1, "Number matched against middle of invalid-style range." );
-            #is( $test_range->in_range(-47), 1, "Number (negative) matched against middle of invalid-style range." );
+            is( $test_range->in_range(-47), 1, "Number (negative) matched against middle of invalid-style range." );
             is( $test_range->in_range(25),  1, "Number matched against end of invalid-style range." );
-            #is( $test_range->in_range(-45), 1, "Number (negative) matched against end of invalid-style range." );
+            is( $test_range->in_range(-45), 1, "Number (negative) matched against end of invalid-style range." );
             is( $test_range->in_range(22),  1, "Number matched inside first range of invalid-style range." );
-            #is( $test_range->in_range(-46), 1, "Number (negative) matched inside first range of invalid-style range." );
+            is( $test_range->in_range(-46), 1, "Number (negative) matched inside first range of invalid-style range." );
             is( $test_range->in_range(24),  1, "Number matched inside second range of invalid-style range." );
-            #is( $test_range->in_range(-48), 1, "Number (negative) matched inside second range of invalid-style range." );
+            is( $test_range->in_range(-48), 1, "Number (negative) matched inside second range of invalid-style range." );
 
             is( $test_range->in_range(32),  1, "Number matched against start of backwards longer-invalid-style range." );
-            #is( $test_range->in_range(-58), 1, "Number (negative) matched against start of backwards longer-invalid-style range." );
+            is( $test_range->in_range(-58), 1, "Number (negative) matched against start of backwards longer-invalid-style range." );
             is( $test_range->in_range(30),  1, "Number matched against middle of backwards longer-invalid-style range." );
-            #is( $test_range->in_range(-60), 1, "Number (negative) matched against middle of backwards longer-invalid-style range." );
+            is( $test_range->in_range(-60), 1, "Number (negative) matched against middle of backwards longer-invalid-style range." );
             is( $test_range->in_range(27),  1, "Number matched against end of backwards longer-invalid-style range." );
-            #is( $test_range->in_range(-55), 1, "Number (negative) matched against end of backwards longer-invalid-style range." );
+            is( $test_range->in_range(-55), 1, "Number (negative) matched against end of backwards longer-invalid-style range." );
             is( $test_range->in_range(31),  1, "Number matched inside first range of backwards longer-invalid-style range." );
-            #is( $test_range->in_range(-59), 1, "Number (negative) matched inside first range of backwards longer-invalid-style range." );
+            is( $test_range->in_range(-59), 1, "Number (negative) matched inside first range of backwards longer-invalid-style range." );
             is( $test_range->in_range(28),  1, "Number matched inside second range of backwards longer-invalid-style range." );
-            #is( $test_range->in_range(-56), 1, "Number (negative) matched inside second range of backwards longer-invalid-style range." );
+            is( $test_range->in_range(-56), 1, "Number (negative) matched inside second range of backwards longer-invalid-style range." );
         }
 
         # Not in range
-        #{
-        #    isnt( $test_range->in_range(4),         1, "Number not in range." );
-        #    isnt( $test_range->in_range(1_000_000), 1, "Number not in range." );
-        #    isnt( $test_range->in_range(-1),        1, "Number (negative) not in range" );
-        #    isnt( $test_range->in_range(12),        1, "Number (possible range_token misinterpretation) not in range." );           
-        #}
+        {
+            isnt( $test_range->in_range(4),         1, "Number not in range." );
+            isnt( $test_range->in_range(1_000_000), 1, "Number not in range." );
+            isnt( $test_range->in_range(-1),        1, "Number (negative) not in range" );
+            isnt( $test_range->in_range(12),        1, "Number (possible range_token misinterpretation) not in range." );           
+        }
     }
 };
 

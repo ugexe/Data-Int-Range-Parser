@@ -38,7 +38,6 @@ Handle integer ranges.
     use Data::Int::Range::Parser;
 
     my $range = Data::Int::Range::Parser->new( 
-        range_ops => [qw/- ../], 
         range     => ['1..3', 5, 6, '8-10', '15..11'],
     );
 
@@ -82,8 +81,8 @@ sub new {
     $self->{ranges}           = exists $args->{ranges}           ?$args->{ranges}         :[];
 
     # Probably need to quotemeta these values from user input
-    $self->{group_token}      = exists $args->{group_token}      ?$args->{group_token}    :[',', '-'];     # These can be regexes
-    $self->{range_token}      = exists $args->{range_token}      ?$args->{range_token}    :['..', '...'];  # or strings
+    $self->{group_token}      = exists $args->{group_token}      ?$args->{group_token}    :[','];   # These can be regexes
+    $self->{range_token}      = exists $args->{range_token}      ?$args->{range_token}    :['..'];  # or strings
 
     # Options
     $self->{no_reverse}       = exists $args->{no_reverse}       ?$args->{no_reverse}     :0; # Don't turn 3..1 to 1..3
