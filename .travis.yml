@@ -33,12 +33,13 @@ before_install:
     - build-dist
     - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 install:
-    - cpan-install --toolchain
+    - cpan-install Test::More
     - cpan-install --deps       # installs prereqs, including recommends
     - cpan-install --coverage   # installs converage prereqs, if enabled
 before_script:
     - coverage-setup
 script:
+    - perl -MTest::More -e 'print $Test::More::VERSION';
     - prove -l -v $(test-dirs)
 after_success:
     - coverage-report
