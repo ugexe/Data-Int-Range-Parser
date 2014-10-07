@@ -150,7 +150,7 @@ sub clean_range {
     my $rx_range_delim = _build_regex_delim( $range_tokens );
 
     my @new_groups = map { 
-        join($range_tokens->[0], _min_max( split($rx_range_delim, $_) )); 
+        join($range_tokens->[0], _min_max( split($rx_range_delim, $_) )) if "$_" ne ''; 
     } map { split($rx_group_delim, ($_)) } @{$ranges};
 
     # DELETE OVER LAPPING RANGES HERE
