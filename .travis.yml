@@ -38,7 +38,7 @@ install:
 before_script:
     - coverage-setup
 script:
-    - prove -l -v $(test-dirs)   # parallel testing
+    - prove -l -v $(test-dirs)
 after_success:
     - coverage-report
 notifications:
