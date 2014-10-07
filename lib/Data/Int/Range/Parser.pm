@@ -21,7 +21,7 @@ our @EXPORT_OK = qw/clean_range/;
 
 =head1 NAME
 
-Data::Int::Range::Parser - The great new Data::Int::Range::Parser!
+Data::Int::Range::Parser - Parse Perl number ranges.
 
 =head1 VERSION
 
