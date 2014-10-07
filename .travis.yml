@@ -33,6 +33,7 @@ before_install:
     - build-dist
     - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 install:
+    cpanm http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/Test-Simple-1.001006.tar.gz
     - cpan-install --deps       # installs prereqs, including recommends
     - cpan-install --coverage   # installs converage prereqs, if enabled
 before_script:
