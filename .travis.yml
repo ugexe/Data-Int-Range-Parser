@@ -15,7 +15,7 @@ matrix:
   allow_failures:
     - perl: "blead"             # ignore failures for blead perl
 before_install:
-    - git clone git://github.com/ugexe/helpers/tree/prove_j_fix ~/travis-perl-helpers
+    - git clone https://github.com/ugexe/helpers/tree/prove_j_fix ~/travis-perl-helpers
     - source ~/travis-perl-helpers/init
     - build-perl
     - perl -V
