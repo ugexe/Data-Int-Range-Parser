@@ -27,7 +27,7 @@ install:
 before_script:
     - coverage-setup
 script:
-    - prove -l -v $(test-dirs)
+    - prove -l -v -j$((SYSTEM_CORES + 1)) $(test-dirs)
 after_success:
     - coverage-report
 notifications:
