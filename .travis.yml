@@ -15,14 +15,13 @@ matrix:
   allow_failures:
     - perl: "blead"             # ignore failures for blead perl
 before_install:
-    - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+    - git clone git://github.com/ugexe/helpers/tree/prove_j_fix ~/travis-perl-helpers
     - source ~/travis-perl-helpers/init
     - build-perl
     - perl -V
     - build-dist
     - cd $BUILD_DIR             # $BUILD_DIR is set by the build-dist command
 install:
-    - cpan-install prove~">= 2.99_03";
     - cpan-install --deps       # installs prereqs, including recommends
     - cpan-install --coverage   # installs converage prereqs, if enabled
 before_script:
