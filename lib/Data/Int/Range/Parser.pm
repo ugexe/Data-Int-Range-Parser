@@ -19,6 +19,8 @@ our @EXPORT_OK = qw/clean_range/;
 
 3. Add option for ignoring quoted fields and/or non-numbers
 
+4. Rework everything to allow and handle '...' which is a valid range op
+
 =head1 NAME
 
 Data::Int::Range::Parser - Parse Perl number ranges.

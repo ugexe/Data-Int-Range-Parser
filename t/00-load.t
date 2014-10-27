@@ -10,4 +10,4 @@ BEGIN {
     use_ok( 'Data::Int::Range::Parser' ) || print "Error 'use'ing module!\n";
 }
 
-diag( "Testing Data::Int::Range::Parser $Data::Int::Range::Parser::VERSION, Perl $], $^X" );
+#diag( "Testing Data::Int::Range::Parser $Data::Int::Range::Parser::VERSION, Perl $], $^X" );
