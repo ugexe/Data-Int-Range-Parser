@@ -2,7 +2,6 @@ language: perl
 perl:
     - "5.8"
     - "5.8-thr"
-    - "5.8.8"
     - "5.10"
     - "5.18"
     - "5.18-thr"
@@ -31,9 +30,4 @@ script:
     - prove -l -v -j$((SYSTEM_CORES + 1)) $(test-dirs)
 after_success:
     - coverage-report
-notifications:
-    recipients:
-    - ugexe@cpan.org
-    email:
-        on_success: change
-        on_failure: always
+
