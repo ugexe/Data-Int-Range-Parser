@@ -49,7 +49,6 @@ my @options = (
 ##################################################################################
 
 
-
 ##################################################################################
 # Start testing
 ##################################################################################
@@ -109,6 +108,16 @@ subtest 'in_range({ strict => 0 })' => sub {
             isnt( $test_range->in_range(-1),        1, "Number (negative) not in range" );
             isnt( $test_range->in_range(12),        1, "Number (possible range_token misinterpretation) not in range." );           
         }
+    }
+};
+
+
+subtest 'in_range({ strict => 1 })' => sub {
+    foreach my $option_ref ( @options ) {
+        note( "Ranges: " . join(',', map { "[" . join(',',$_) . "]" } @{$option_ref->{ranges}}) );
+
+        my $test_range = new_ok( 'Data::Int::Range::Parser', [$option_ref] );
+        is( Data::Int::Range::Parser::clean_range($option_ref->{ranges}, $option_ref->{group_tokens}, $option_ref->{range_tokens}, 1), undef, "Invalid range with strict => 1");
     }
 };
 

@@ -144,6 +144,8 @@ Transform technically bad ranges into proper perl ranges.
 
 sub clean_range {
     # TODO: To perl, (\d+).(\d+) counts as $1 (rounded down to remove decimal point)
+    # i.e. perl -MModern::Perl -e "say $_ for 1.9..3"; = 1, 2, 3
+    # and fix the delimiter tokens accordingly
     # TODO wantarray/scalar
     my ($ranges, $group_tokens, $range_tokens, $strict) = @_;
 
@@ -153,6 +155,12 @@ sub clean_range {
     my @new_groups = map { 
         join($range_tokens->[0], _min_max( split($rx_range_delim, $_) )); 
     } map { split($rx_group_delim, ($_)) } @{$ranges};
+
+    return undef if $strict &&
+        grep {
+            $_ =~  /$rx_range_delim\D/
+        ||  $_ =~  /$rx_group_delim\D/
+    } @new_groups;
 
     # DELETE OVER LAPPING RANGES HERE
     #@new_groups = _consolidate_range( \@new_groups );
@@ -171,7 +179,6 @@ sub _in_range {
     return 1 if( _exact_match(@_) || _range_match(@_) );
 }
 
-# Does not match against ranges (i.e. 1 does not match 1..5,6 but matches 1,2..6)
 sub _exact_match {
     my ($ranges, $against, $group_tokens, $range_tokens) = @_;
 
@@ -185,7 +192,6 @@ sub _exact_match {
                     @{$ranges};
 }
 
-# Does not match against single values (i.e. 1 does not match 1,2..6 byt matches 1..5,6)
 sub _range_match {
     my ($ranges, $against, $group_tokens, $range_tokens) = @_;
 
