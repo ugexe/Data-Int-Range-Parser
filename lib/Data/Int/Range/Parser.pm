@@ -156,6 +156,8 @@ sub clean_range {
         join($range_tokens->[0], _min_max( split($rx_range_delim, $_) )); 
     } map { split($rx_group_delim, ($_)) } @{$ranges};
 
+    # make sure each range group is valid (treated like eval{ say $_ for $range } )
+    # i.e. invalid: 1.. | 1..3..5 | 1<any non-default range operator used>3
     return undef if $strict &&
         grep {
             $_ =~  /$rx_range_delim\D/
@@ -163,7 +165,7 @@ sub clean_range {
     } @new_groups;
 
     # DELETE OVER LAPPING RANGES HERE
-    #@new_groups = _consolidate_range( \@new_groups );
+    #@new_groups = _consolidate_ranges( \@new_groups );
     return \@new_groups;
 }
 
@@ -208,15 +210,37 @@ sub _range_match {
     );
 }
 
+
+=head2 _consolidate_range
+
+Restructure the ranges such that there are no overlapping values.
+
+Currently only works against $group that is NOT a range. To compare 
+
+against $group that is a range we need to add another loop.
+
+=cut
+
 sub _consolidate_range {
-    my ($ranges, $group_tokens, $range_tokens, $strict) = @_;
+    my ($groups, $strict) = @_;
 
     my $rx_group_delim = _build_regex_delim( $group_tokens );
     my $rx_range_delim = _build_regex_delim( $range_tokens );
 
-    #grep { split(/$rx_range_delim/, $_) <= 1 } @{$new_groups};
+    my @consolidated_ranges;
+    RANGE: foreach my $range (@{ $ranges }) {
+        CHECK: foreach my $range_check ( @consolidated_ranges ) {
+            next RANGE if $range eq $range_check;
+            next RANGE if grep {
+                my ($start, $end) = _min_max( split($rx_range_delim, $_) );
+                (sort {$a <=> $b} $start, $end, $_)[1] == $_; 
+            } @consolidated_ranges;
+        }
 
-    #return @new_groups;
+        push @consolidated_ranges, $range;
+    }
+
+    return \@consolidated_ranges;
 }
 
 sub _min_max {
